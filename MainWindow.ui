@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowClass</class>
+ <widget class="QMainWindow" name="MainWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>899</width>
+    <height>594</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Mesh Watermarking</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/images/main.png</normaloff>:/images/main.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="margin">
+     <number>1</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <property name="margin">
+       <number>1</number>
+      </property>
+      <item>
+       <widget class="SdfViewer" name="world" native="true"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="windowTitle">
+    <string>Tool Box</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="loadMeshAction"/>
+   <addaction name="loadMeshFeaturesAction"/>
+   <addaction name="loadCageAction"/>
+   <addaction name="separator"/>
+   <addaction name="saveMeshAction"/>
+   <addaction name="saveMeshFeaturesAction"/>
+   <addaction name="snapAction"/>
+   <addaction name="separator"/>
+   <addaction name="clearModelsAction"/>
+   <addaction name="removeSelectedModelAction"/>
+   <addaction name="separator"/>
+   <addaction name="appParametersAction"/>
+   <addaction name="renderingParametersAction"/>
+   <addaction name="glLightsAction"/>
+   <addaction name="separator"/>
+   <addaction name="selectObjectAction"/>
+   <addaction name="selectFacetAction"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>899</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="loadMeshAction"/>
+    <addaction name="loadMeshFeaturesAction"/>
+    <addaction name="loadCageAction"/>
+    <addaction name="separator"/>
+    <addaction name="saveMeshAction"/>
+    <addaction name="saveMeshFeaturesAction"/>
+    <addaction name="snapAction"/>
+    <addaction name="separator"/>
+    <addaction name="fileExitAction"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuCage_Deformation">
+     <property name="title">
+      <string>Cage Deformation</string>
+     </property>
+     <addaction name="generateCageMeshAction"/>
+     <addaction name="separator"/>
+     <addaction name="mvcAction"/>
+     <addaction name="hcAction"/>
+     <addaction name="gcAction"/>
+    </widget>
+    <widget class="QMenu" name="menuCalculate_Volume">
+     <property name="title">
+      <string>Calculate LSD</string>
+     </property>
+     <addaction name="calculateLSDVerticesAction"/>
+     <addaction name="calculateLSDFacetsAction"/>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+    </widget>
+    <widget class="QMenu" name="menuDraw_Histogram">
+     <property name="title">
+      <string>Histogram</string>
+     </property>
+     <addaction name="vertexLSDValueAction"/>
+     <addaction name="vertexNLSDValueAction"/>
+     <addaction name="facetLSDValueAction"/>
+     <addaction name="facetNLSDValueAction"/>
+     <addaction name="separator"/>
+     <addaction name="vertexLSDBinsAction"/>
+     <addaction name="vertexNLSDBinsAction"/>
+     <addaction name="facetLSDBinsAction"/>
+     <addaction name="facetNLSDBinsAction"/>
+     <addaction name="separator"/>
+     <addaction name="vertexLSDProbabilityAction"/>
+     <addaction name="vertexNLSDProbabilityAction"/>
+     <addaction name="facetLSDProbabilityAction"/>
+     <addaction name="facetNLSDProbabilityAction"/>
+     <addaction name="separator"/>
+    </widget>
+    <widget class="QMenu" name="menuOthers">
+     <property name="title">
+      <string>Others</string>
+     </property>
+     <addaction name="reverseNormalsAction"/>
+    </widget>
+    <widget class="QMenu" name="menuMetric">
+     <property name="title">
+      <string>Metric</string>
+     </property>
+     <addaction name="signalToNoiseRatioAction"/>
+     <addaction name="peakSignalToNoiseRatioAction"/>
+     <addaction name="maximumRootMeanSquareAction"/>
+     <addaction name="hausdorffDistanceAction"/>
+    </widget>
+    <widget class="QMenu" name="menuWatermark">
+     <property name="title">
+      <string>Watermark</string>
+     </property>
+     <addaction name="embedWatermarkLSDAction"/>
+     <addaction name="detectWatermarkLSDAction"/>
+    </widget>
+    <widget class="QMenu" name="menuDeformation">
+     <property name="title">
+      <string>Deformation</string>
+     </property>
+     <addaction name="calculateDeformationDistanceAction"/>
+    </widget>
+    <widget class="QMenu" name="menuAttacks_3">
+     <property name="title">
+      <string>Attacks</string>
+     </property>
+     <widget class="QMenu" name="menuFile_Data_Attack">
+      <property name="title">
+       <string>File Data Attack</string>
+      </property>
+      <addaction name="reorderingAction"/>
+     </widget>
+     <widget class="QMenu" name="menuGeometry_Attacks_2">
+      <property name="title">
+       <string>Geometry Attacks</string>
+      </property>
+      <addaction name="noiseAction"/>
+      <addaction name="quantizationAction"/>
+      <addaction name="smoothingAction"/>
+      <addaction name="similarityTransformAction"/>
+      <addaction name="separator"/>
+      <addaction name="translationAction"/>
+      <addaction name="rotationAction"/>
+      <addaction name="uniformScalingAction"/>
+      <addaction name="nonUniformScalingAction"/>
+     </widget>
+     <widget class="QMenu" name="menuTopology_Attacks_2">
+      <property name="title">
+       <string>Topology Attacks</string>
+      </property>
+      <addaction name="simplificationLindstromturkAction"/>
+      <addaction name="simplificationMidpointAction"/>
+      <addaction name="separator"/>
+      <addaction name="subdivisionCatmullClarkAction"/>
+      <addaction name="subdivisionDoosabinAction"/>
+      <addaction name="subdivisionLoopAction"/>
+      <addaction name="subdivisionSqrt3Action"/>
+      <addaction name="subdivisionMidpointAction"/>
+     </widget>
+     <addaction name="allAttacksAction"/>
+     <addaction name="separator"/>
+     <addaction name="menuFile_Data_Attack"/>
+     <addaction name="menuGeometry_Attacks_2"/>
+     <addaction name="menuTopology_Attacks_2"/>
+    </widget>
+    <addaction name="menuCalculate_Volume"/>
+    <addaction name="separator"/>
+    <addaction name="menuDraw_Histogram"/>
+    <addaction name="separator"/>
+    <addaction name="menuWatermark"/>
+    <addaction name="separator"/>
+    <addaction name="menuAttacks_3"/>
+    <addaction name="separator"/>
+    <addaction name="menuMetric"/>
+    <addaction name="separator"/>
+    <addaction name="menuDeformation"/>
+    <addaction name="separator"/>
+    <addaction name="menuCage_Deformation"/>
+    <addaction name="separator"/>
+    <addaction name="menuOthers"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuDirRunner">
+    <property name="title">
+     <string>DirRunner</string>
+    </property>
+    <widget class="QMenu" name="menuAttacks_2">
+     <property name="title">
+      <string>Attacks</string>
+     </property>
+     <widget class="QMenu" name="menuTopology_Attacks_3">
+      <property name="title">
+       <string>Topology Attacks</string>
+      </property>
+      <addaction name="dirRunnerSimplificationLindstromturkAction"/>
+      <addaction name="dirRunnerSimplificationMidpointAction"/>
+      <addaction name="dirRunnerSubdivisionCatmullClarkAction"/>
+      <addaction name="dirRunnerSubdivisionDoosabinAction"/>
+      <addaction name="dirRunnerSubdivisionLoopAction"/>
+      <addaction name="dirRunnerSubdivisionSqrt3Action"/>
+      <addaction name="dirRunnerSubdivisionMidpointAction"/>
+     </widget>
+     <widget class="QMenu" name="menuGeometry_Attacks_3">
+      <property name="title">
+       <string>Geometry Attacks</string>
+      </property>
+      <addaction name="dirRunnerNoiseAction"/>
+      <addaction name="dirRunnerQuantizationAction"/>
+      <addaction name="dirRunnerSmoothingAction"/>
+      <addaction name="dirRunnerSimilarityTransformAction"/>
+     </widget>
+     <widget class="QMenu" name="menuFile_Data_Attack_2">
+      <property name="title">
+       <string>File Data Attack</string>
+      </property>
+      <addaction name="dirRunnerReorderingAction"/>
+     </widget>
+     <addaction name="dirRunnerAllAttacksAction"/>
+     <addaction name="separator"/>
+     <addaction name="menuFile_Data_Attack_2"/>
+     <addaction name="menuGeometry_Attacks_3"/>
+     <addaction name="menuTopology_Attacks_3"/>
+    </widget>
+    <widget class="QMenu" name="menuCalculate_SDF">
+     <property name="title">
+      <string>Calculate LSD</string>
+     </property>
+     <addaction name="dirRunnerCalculateLSDVerticesAction"/>
+     <addaction name="dirRunnerCalculateLSDFacetsAction"/>
+    </widget>
+    <widget class="QMenu" name="menuWatermark_2">
+     <property name="title">
+      <string>Watermark</string>
+     </property>
+     <addaction name="dirRunnerDetectWatermarkLSDAction"/>
+    </widget>
+    <widget class="QMenu" name="menuDeformation_2">
+     <property name="title">
+      <string>Deformation</string>
+     </property>
+     <addaction name="dirRunnerCalculateDeformationDistanceAction"/>
+     <addaction name="dirRunnerDeformationDegreeAction"/>
+    </widget>
+    <addaction name="menuCalculate_SDF"/>
+    <addaction name="separator"/>
+    <addaction name="menuWatermark_2"/>
+    <addaction name="separator"/>
+    <addaction name="menuAttacks_2"/>
+    <addaction name="separator"/>
+    <addaction name="menuDeformation_2"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuView"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuDirRunner"/>
+  </widget>
+  <action name="loadMeshAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/load_mesh.png</normaloff>:/images/load_mesh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load Mesh</string>
+   </property>
+  </action>
+  <action name="clearModelsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/removeall.png</normaloff>:/images/removeall.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear Models</string>
+   </property>
+  </action>
+  <action name="removeSelectedModelAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/removeone.png</normaloff>:/images/removeone.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Selected</string>
+   </property>
+  </action>
+  <action name="appParametersAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/app_params.PNG</normaloff>:/images/app_params.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>App Params</string>
+   </property>
+  </action>
+  <action name="loadMeshFeaturesAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/load_features.png</normaloff>:/images/load_features.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load Mesh Features</string>
+   </property>
+  </action>
+  <action name="saveMeshFeaturesAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/save_features.png</normaloff>:/images/save_features.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Mesh Features</string>
+   </property>
+  </action>
+  <action name="calculateLSDFacetsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/sdf_facets.PNG</normaloff>:/images/sdf_facets.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate LSD Facets</string>
+   </property>
+   <property name="toolTip">
+    <string>Calculate LSD Facets</string>
+   </property>
+  </action>
+  <action name="calculateLSDVerticesAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/sdf_vertices.PNG</normaloff>:/images/sdf_vertices.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate LSD Vertices</string>
+   </property>
+   <property name="toolTip">
+    <string>Calculate LSD Vertices</string>
+   </property>
+  </action>
+  <action name="reverseNormalsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/reverse_normals.PNG</normaloff>:/images/reverse_normals.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>Reverse Normals</string>
+   </property>
+  </action>
+  <action name="renderingParametersAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/world_params.png</normaloff>:/images/world_params.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rendering Params</string>
+   </property>
+  </action>
+  <action name="fileExitAction">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+  </action>
+  <action name="selectFacetAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/select_facet.png</normaloff>:/images/select_facet.png</iconset>
+   </property>
+   <property name="text">
+    <string>Select Facet</string>
+   </property>
+  </action>
+  <action name="glLightsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/gllights.png</normaloff>:/images/gllights.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Lights</string>
+   </property>
+  </action>
+  <action name="snapAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/digital_camera_icon.png</normaloff>:/images/digital_camera_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Snapshot</string>
+   </property>
+  </action>
+  <action name="selectObjectAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/select_object.PNG</normaloff>:/images/select_object.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>Select Object</string>
+   </property>
+  </action>
+  <action name="facetLSDValueAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Facet LSD Value</string>
+   </property>
+   <property name="toolTip">
+    <string>Facet LSD Value</string>
+   </property>
+  </action>
+  <action name="facetNLSDValueAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Facet NLSD Value</string>
+   </property>
+   <property name="toolTip">
+    <string>Facet NLSD Value</string>
+   </property>
+  </action>
+  <action name="reorderingAction">
+   <property name="text">
+    <string>Reordering</string>
+   </property>
+  </action>
+  <action name="noiseAction">
+   <property name="text">
+    <string>Noise</string>
+   </property>
+  </action>
+  <action name="similarityTransformAction">
+   <property name="text">
+    <string>SimilarityTransform</string>
+   </property>
+  </action>
+  <action name="smoothingAction">
+   <property name="text">
+    <string>Smoothing</string>
+   </property>
+  </action>
+  <action name="quantizationAction">
+   <property name="text">
+    <string>Quantization</string>
+   </property>
+  </action>
+  <action name="subdivisionCatmullClarkAction">
+   <property name="text">
+    <string>Subdivision: Catmull-Clark</string>
+   </property>
+   <property name="toolTip">
+    <string>Subdivision: Catmull-Clark</string>
+   </property>
+  </action>
+  <action name="simplificationMidpointAction">
+   <property name="text">
+    <string>Simplification: Midpoint</string>
+   </property>
+  </action>
+  <action name="allAttacksAction">
+   <property name="text">
+    <string>AllAttacks</string>
+   </property>
+  </action>
+  <action name="dirRunnerDeformationDegreeAction">
+   <property name="text">
+    <string>Deformatoin Degree</string>
+   </property>
+   <property name="toolTip">
+    <string>Deformatoin Degree</string>
+   </property>
+  </action>
+  <action name="translationAction">
+   <property name="text">
+    <string>Translation</string>
+   </property>
+  </action>
+  <action name="rotationAction">
+   <property name="text">
+    <string>Rotation</string>
+   </property>
+  </action>
+  <action name="uniformScalingAction">
+   <property name="text">
+    <string>UniformScaling</string>
+   </property>
+  </action>
+  <action name="nonUniformScalingAction">
+   <property name="text">
+    <string>Non-UniformScaling</string>
+   </property>
+  </action>
+  <action name="mvcAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/mvc.png</normaloff>:/images/mvc.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mean Value Coordinates</string>
+   </property>
+  </action>
+  <action name="hcAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/hc.png</normaloff>:/images/hc.png</iconset>
+   </property>
+   <property name="text">
+    <string>Harmonic Coordinates</string>
+   </property>
+  </action>
+  <action name="gcAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/gc.png</normaloff>:/images/gc.png</iconset>
+   </property>
+   <property name="text">
+    <string>Green Coordinates</string>
+   </property>
+  </action>
+  <action name="generateCageMeshAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/generate_cage_mesh.png</normaloff>:/images/generate_cage_mesh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Generate Cage Mesh</string>
+   </property>
+  </action>
+  <action name="loadCageAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/load_cage.png</normaloff>:/images/load_cage.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load Cage</string>
+   </property>
+   <property name="toolTip">
+    <string>Load Cage</string>
+   </property>
+  </action>
+  <action name="peakSignalToNoiseRatioAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/measure.png</normaloff>:/images/measure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Peak Signal-to-Noise Ratio (PSNR)</string>
+   </property>
+   <property name="toolTip">
+    <string>Peak Signal-to-Noise Ratio</string>
+   </property>
+  </action>
+  <action name="hausdorffDistanceAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/measure.png</normaloff>:/images/measure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hausdorff Distance</string>
+   </property>
+  </action>
+  <action name="meshStructuralDistortionMeasureAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/measure.png</normaloff>:/images/measure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mesh Structural Distortion Measure (MSDM)</string>
+   </property>
+   <property name="toolTip">
+    <string>Mesh Structural Distortion Measure (MSDM)</string>
+   </property>
+  </action>
+  <action name="vertexLSDValueAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vertex LSD Value</string>
+   </property>
+   <property name="toolTip">
+    <string>Vertex LSD Value</string>
+   </property>
+  </action>
+  <action name="vertexNLSDValueAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vertex NLSD Value</string>
+   </property>
+   <property name="toolTip">
+    <string>Vertex NLSD Value</string>
+   </property>
+  </action>
+  <action name="embedWatermarkLSDAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/embed_watermark.png</normaloff>:/images/embed_watermark.png</iconset>
+   </property>
+   <property name="text">
+    <string>Embed Watermark</string>
+   </property>
+   <property name="toolTip">
+    <string>Embed Watermark</string>
+   </property>
+  </action>
+  <action name="detectWatermarkLSDAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/detect_watermark.png</normaloff>:/images/detect_watermark.png</iconset>
+   </property>
+   <property name="text">
+    <string>Detect Watermark</string>
+   </property>
+   <property name="toolTip">
+    <string>Detect Watermark</string>
+   </property>
+  </action>
+  <action name="facetLSDBinsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Facet LSD Bins</string>
+   </property>
+   <property name="toolTip">
+    <string>Facet LSD Bins</string>
+   </property>
+  </action>
+  <action name="facetNLSDBinsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Facet NLSD Bins</string>
+   </property>
+   <property name="toolTip">
+    <string>Facet NLSD Bins</string>
+   </property>
+  </action>
+  <action name="vertexLSDBinsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vertex LSD Bins</string>
+   </property>
+   <property name="toolTip">
+    <string>Vertex LSD Bins</string>
+   </property>
+  </action>
+  <action name="vertexNLSDBinsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vertex NLSD Bins</string>
+   </property>
+   <property name="toolTip">
+    <string>Vertex NLSD Bins</string>
+   </property>
+  </action>
+  <action name="saveMeshAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/save_mesh.png</normaloff>:/images/save_mesh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Mesh</string>
+   </property>
+  </action>
+  <action name="simplificationLindstromturkAction">
+   <property name="text">
+    <string>Simplification: Lindstromturk</string>
+   </property>
+  </action>
+  <action name="subdivisionDoosabinAction">
+   <property name="text">
+    <string>Subdivision: Doosabin</string>
+   </property>
+  </action>
+  <action name="subdivisionLoopAction">
+   <property name="text">
+    <string>Subdivision: Loop</string>
+   </property>
+  </action>
+  <action name="subdivisionSqrt3Action">
+   <property name="text">
+    <string>Subdivision: Sqrt3</string>
+   </property>
+  </action>
+  <action name="subdivisionMidpointAction">
+   <property name="text">
+    <string>Subdivision: Midpoint</string>
+   </property>
+  </action>
+  <action name="vertexLSDProbabilityAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vertex LSD Probability</string>
+   </property>
+   <property name="toolTip">
+    <string>Vertex LSD Probability</string>
+   </property>
+  </action>
+  <action name="vertexNLSDProbabilityAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vertex NLSD Probability</string>
+   </property>
+   <property name="toolTip">
+    <string>Vertex NLSD Probability</string>
+   </property>
+  </action>
+  <action name="facetLSDProbabilityAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Facet LSD Probability</string>
+   </property>
+  </action>
+  <action name="facetNLSDProbabilityAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/histogram.png</normaloff>:/images/histogram.png</iconset>
+   </property>
+   <property name="text">
+    <string>Facet NLSD Probability</string>
+   </property>
+   <property name="toolTip">
+    <string>Facet NLSD Probability</string>
+   </property>
+  </action>
+  <action name="signalToNoiseRatioAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/measure.png</normaloff>:/images/measure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Signal-to-Noise Ratio (SNR)</string>
+   </property>
+  </action>
+  <action name="maximumRootMeanSquareAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/measure.png</normaloff>:/images/measure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Maximum Root Mean Square Error (MRMS)</string>
+   </property>
+   <property name="toolTip">
+    <string>Maximum Root Mean Square Error (MRMS)</string>
+   </property>
+  </action>
+  <action name="dirRunnerCalculateLSDVerticesAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/sdf_vertices.PNG</normaloff>:/images/sdf_vertices.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate LSD Vertices</string>
+   </property>
+   <property name="toolTip">
+    <string>Calculate LSD Vertices</string>
+   </property>
+  </action>
+  <action name="dirRunnerDetectWatermarkLSDAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/detect_watermark.png</normaloff>:/images/detect_watermark.png</iconset>
+   </property>
+   <property name="text">
+    <string>Detect Watermark</string>
+   </property>
+   <property name="toolTip">
+    <string>Detect Watermark</string>
+   </property>
+  </action>
+  <action name="dirRunnerAllAttacksAction">
+   <property name="text">
+    <string>All Attacks</string>
+   </property>
+  </action>
+  <action name="dirRunnerSimplificationLindstromturkAction">
+   <property name="text">
+    <string>Simplification: Lindstromturk</string>
+   </property>
+  </action>
+  <action name="dirRunnerSimplificationMidpointAction">
+   <property name="text">
+    <string>Simplification: Midpoint</string>
+   </property>
+  </action>
+  <action name="dirRunnerSubdivisionCatmullClarkAction">
+   <property name="text">
+    <string>Subdivision: Catmull-Clark</string>
+   </property>
+  </action>
+  <action name="dirRunnerSubdivisionDoosabinAction">
+   <property name="text">
+    <string>Subdivision: Doosabin</string>
+   </property>
+  </action>
+  <action name="dirRunnerSubdivisionLoopAction">
+   <property name="text">
+    <string>Subdivision: Loop</string>
+   </property>
+  </action>
+  <action name="dirRunnerSubdivisionSqrt3Action">
+   <property name="text">
+    <string>Subdivision: Sqrt3</string>
+   </property>
+  </action>
+  <action name="dirRunnerSubdivisionMidpointAction">
+   <property name="text">
+    <string>Subdivision: Midpoint</string>
+   </property>
+  </action>
+  <action name="dirRunnerReorderingAction">
+   <property name="text">
+    <string>Reordering</string>
+   </property>
+  </action>
+  <action name="dirRunnerNoiseAction">
+   <property name="text">
+    <string>Noise</string>
+   </property>
+  </action>
+  <action name="dirRunnerQuantizationAction">
+   <property name="text">
+    <string>Quantization</string>
+   </property>
+  </action>
+  <action name="dirRunnerSmoothingAction">
+   <property name="text">
+    <string>Smoothing</string>
+   </property>
+  </action>
+  <action name="dirRunnerSimilarityTransformAction">
+   <property name="text">
+    <string>SimilarityTransform</string>
+   </property>
+  </action>
+  <action name="dirRunnerCalculateLSDFacetsAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/sdf_facets.PNG</normaloff>:/images/sdf_facets.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate LSD Facets</string>
+   </property>
+   <property name="toolTip">
+    <string>Calculate LSD Facets</string>
+   </property>
+  </action>
+  <action name="calculateDeformationDistanceAction">
+   <property name="text">
+    <string>Calculate Deformation Distance</string>
+   </property>
+  </action>
+  <action name="dirRunnerCalculateDeformationDistanceAction">
+   <property name="text">
+    <string>Calculate Deformation Distance</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>SdfViewer</class>
+   <extends>QWidget</extends>
+   <header>SdfViewer.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

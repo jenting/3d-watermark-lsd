@@ -1,0 +1,218 @@
+<ui version="4.0" stdsetdef="1" >
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>ColorSchemeEditor</class>
+  <widget class="QDialog" name="ColorSchemeEditor" >
+    <property name="geometry" >
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>396</width>
+        <height>359</height>
+      </rect>
+    </property>
+    <property name="windowTitle" >
+      <string>Color Scheme Editor</string>
+    </property>
+    <property name="sizeGripEnabled" >
+      <bool>true</bool>
+    </property>
+    <layout class="QGridLayout" >
+      <property name="resizeMode" >
+        <enum>Fixed</enum>
+      </property>
+      <item rowspan="1" row="2" column="0" colspan="2" >
+        <layout class="QHBoxLayout" >
+          <property name="margin" >
+            <number>0</number>
+          </property>
+          <property name="spacing" >
+            <number>6</number>
+          </property>
+          <item>
+            <widget class="QPushButton" name="buttonHelp" >
+              <property name="text" >
+                <string>&amp;Help</string>
+              </property>
+              <property name="shortcut" >
+                <string>F1</string>
+              </property>
+              <property name="autoDefault" >
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="Horizontal Spacing2" >
+              <property name="sizeHint" >
+                <size>
+                  <width>20</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType" >
+                <enum>Expanding</enum>
+              </property>
+              <property name="orientation" >
+                <enum>Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="QPushButton" name="buttonOk" >
+              <property name="text" >
+                <string>&amp;OK</string>
+              </property>
+              <property name="shortcut" >
+                <string/>
+              </property>
+              <property name="autoDefault" >
+                <bool>true</bool>
+              </property>
+              <property name="default" >
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="buttonCancel" >
+              <property name="text" >
+                <string>&amp;Cancel</string>
+              </property>
+              <property name="shortcut" >
+                <string/>
+              </property>
+              <property name="autoDefault" >
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+      <item row="1" column="1" >
+        <layout class="QHBoxLayout" >
+          <property name="margin" >
+            <number>0</number>
+          </property>
+          <item>
+            <widget class="QPushButton" name="newButton" >
+              <property name="text" >
+                <string>New</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="deleteButton" >
+              <property name="text" >
+                <string>Delete</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="renameButton" >
+              <property name="text" >
+                <string>Rename</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="spacer2" >
+              <property name="sizeHint" >
+                <size>
+                  <width>121</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType" >
+                <enum>Expanding</enum>
+              </property>
+              <property name="orientation" >
+                <enum>Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+      </item>
+      <item row="0" column="1" >
+        <widget class="QTabWidget" name="csProperties" >
+          <widget class="QWidget" name="csDetails" >
+            <attribute name="title" >
+              <string>Properties</string>
+            </attribute>
+          </widget>
+        </widget>
+      </item>
+      <item rowspan="2" row="0" column="0" colspan="1" >
+        <widget class="Q3ListBox" name="csNames" >
+          <property name="sizePolicy" >
+            <sizepolicy>
+              <hsizetype>0</hsizetype>
+              <vsizetype>7</vsizetype>
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+            </sizepolicy>
+          </property>
+          <item>
+            <property name="text" >
+              <string>New Item</string>
+            </property>
+          </item>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11" />
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <includes>
+    <include location="local" >RenderingParams.h</include>
+    <include location="global" >hash_map</include>
+    <include location="global" >string</include>
+    <include location="local" >ColorButton.h</include>
+    <include location="global" >qcheckbox.h</include>
+  </includes>
+  <connections>
+    <connection>
+      <sender>buttonOk</sender>
+      <signal>clicked()</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>accept()</slot>
+    </connection>
+    <connection>
+      <sender>buttonCancel</sender>
+      <signal>clicked()</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>reject()</slot>
+    </connection>
+    <connection>
+      <sender>newButton</sender>
+      <signal>clicked()</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>OnNewScheme()</slot>
+    </connection>
+    <connection>
+      <sender>deleteButton</sender>
+      <signal>clicked()</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>OnDeleteScheme()</slot>
+    </connection>
+    <connection>
+      <sender>renameButton</sender>
+      <signal>clicked()</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>OnRenameScheme()</slot>
+    </connection>
+    <connection>
+      <sender>csNames</sender>
+      <signal>selected(QString)</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>OnSelectScheme(QString)</slot>
+    </connection>
+    <connection>
+      <sender>csNames</sender>
+      <signal>selectionChanged()</signal>
+      <receiver>ColorSchemeEditor</receiver>
+      <slot>OnSchemeSelectionChanged()</slot>
+    </connection>
+  </connections>
+</ui>
